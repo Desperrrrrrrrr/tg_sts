@@ -1,0 +1,20 @@
+[Unit]
+Description=StreamSync TG — Telegram bot + OAuth callbacks
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+Group=__USER__
+WorkingDirectory=__ROOT__
+Environment=PYTHONPATH=__ROOT__
+ExecStart=__ROOT__/strem_switcher/bin/python -m src.main
+Restart=on-failure
+RestartSec=5
+# Не падать бесконечно при ошибке конфига — пауза между рестартами
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
